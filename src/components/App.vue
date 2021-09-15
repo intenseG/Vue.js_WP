@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <router-link to="/create">新規投稿</router-link> -->
+    <router-link to="/create">新規投稿</router-link>
     <article-list></article-list>
   </div>
 </template>

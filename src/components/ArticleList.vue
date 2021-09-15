@@ -1,12 +1,10 @@
 <template>
   <div id="articles">
     <h1>記事一覧</h1>
-    <ul class="articlesParent">
-      <article
-      v-for="article in articles"
-      v-bind:article="article"
-      v-bind:key="article.id">
-      </article>
+      <ul class="articleParent">
+      <li v-for="article in articles" :key="article.id" class="viewArticleButton">
+        <router-link :to="{ name: 'viewArticle', params: { id: article.id }, query: { article: article }}">{{ article.title }}</router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -17,6 +15,14 @@ export default {
   components: {
     Article
   },
+  data: function() {
+    return {
+      articleList: [],
+    }
+  },
+  created: function() {
+    this.getArticlesAsync();
+  },
   methods: {
     async getArticlesAsync() {
       // const response = await fetch("./resources/articles.json");
@@ -24,12 +30,26 @@ export default {
       const data = await response.json();
       console.log(data);
 
-      return data;
+      if (this.articleList.length > 0) {
+        this.articleList.splice(0);
+      }
+
+      // const articleList = [];
+      for (let i = 0; i < data.length; i++) {
+        this.articleList.push({
+          id: data[i].id,
+          title: data[i].title.rendered,
+          content: data[i].content.rendered
+        });
+      }
+
+      // return articleList;
     }
   },
   computed: {
     articles: function() {
-      return this.getArticlesAsync();
+      // this.getArticlesAsync();
+      return this.articleList;
     }
   }
 };

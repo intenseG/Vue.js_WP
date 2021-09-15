@@ -1,18 +1,14 @@
 <template>
-  <div class="article">
-    <li>
-      <button class="viewArticleButton" @click="viewArticle"></button>{{ article.id }}
-    </li>
+  <div id="app">
+    <div class="article">
+      <div class="articleTitle" v-html="this.$route.query.article.title"></div>
+      <div class="articleContent" v-html="this.$route.query.article.content"></div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["article"],
-  methods: {
-    viewArticle(articleId) {
-      this.$router.push({ path: `/articles/${articleId}` });
-    }
-  }
+  props: []
 };
 </script>
