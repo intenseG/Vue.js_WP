@@ -1,0 +1,54 @@
+#app .articleParent {
+  list-style: none;
+  padding-left: 0;
+}
+
+#app .viewArticleButton {
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#app .articleTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#app .articleContent {
+  font-size: 20px;
+}
+
+#app .postArticleButton {
+  width: 150px;
+  height: 30px;
+  background: #3e3bdf;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#app .postArticleMessage {
+  padding-top: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #df3b49;
+}
+
+#app .postArticleNewLine {
+  padding-bottom: 10px;
+}
+
+#app .articleTitleForm {
+  width: 600px;
+  font-size: 30px;
+}
+
+#app .articleContentForm {
+  width: 600px;
+  height: 360px;
+  font-size: 20px;
+}
