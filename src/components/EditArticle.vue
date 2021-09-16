@@ -2,16 +2,16 @@
   <div id="app">
     <router-link to="/">記事一覧</router-link>
     <div class="postArticleMessage" v-html="message"></div>
-    <h1>記事の作成</h1>
+    <h1>記事の編集</h1>
     <span class="subject">タイトル</span>
     <div class="postArticleNewLine"></div>
-    <input type="text" v-model="title" class="articleTitleForm">
+    <input type="text" v-model="title" v-html="title" class="articleTitleForm">
     <div class="postArticleNewLine"></div>
     <span>本文</span>
     <div class="postArticleNewLine"></div>
-    <textarea v-model="content" class="articleContentForm"></textarea>
+    <textarea v-model="content" v-html="content" class="articleContentForm"></textarea>
     <div class="postArticleNewLine"></div>
-    <button class="postArticleButton" @click="postArticle">投稿</button>
+    <button class="postArticleButton" @click="editArticle">更新</button>
   </div>
 </template>
 
@@ -21,18 +21,17 @@ export default {
     return {
       msgList: [],
       message: "",
-      title: "",
-      content: "",
+      title: this.$route.query.article.title,
+      content: this.$route.query.article.content,
       // userId: process.env.VUE_APP_USER_ID,
       // password: process.env.VUE_APP_PASSWORD
     }
   },
   methods: {
-    initForm: function() {
-      this.title = "";
-      this.content = "";
+    removeHtmlTag: function(baseStr) {
+      return baseStr.replace(/<p>/g, "").replace(/<\/p>/g, "");
     },
-    postArticle: async function() {
+    editArticle: async function() {
       if (this.title === "") {
         this.msgList.push("タイトルが未入力です");
       }
@@ -61,10 +60,9 @@ export default {
         const method = "POST";
         console.log(body);
 
-        fetch("http://127.0.0.1:8000/wp-json/wp/v2/posts", {method, headers, body})
+        fetch(`http://127.0.0.1:8000/wp-json/wp/v2/posts/${this.$route.query.article.id}`, {method, headers, body})
         .then((res) => {
-          this.initForm();
-          this.message = "記事を公開しました";
+          this.message = "記事を更新しました";
         });
       }
     }

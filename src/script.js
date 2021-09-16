@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import App from "./components/App.vue";
 import Article from "./components/Article.vue";
 import CreateArticle from "./components/CreateArticle.vue";
+import EditArticle from "./components/EditArticle.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,12 @@ const routes = [
     path: "/create",
     component: CreateArticle,
   },
+  {
+    path: "/articles/:id/edit",
+    name: "editArticle",
+    component: EditArticle,
+    props: route => ({ query: route.query.article })
+  }
 ];
 
 const router = new VueRouter({

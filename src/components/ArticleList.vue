@@ -34,7 +34,6 @@ export default {
         this.articleList.splice(0);
       }
 
-      // const articleList = [];
       for (let i = 0; i < data.length; i++) {
         this.articleList.push({
           id: data[i].id,
@@ -42,8 +41,6 @@ export default {
           content: data[i].content.rendered
         });
       }
-
-      // return articleList;
     }
   },
   computed: {
